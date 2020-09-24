@@ -2,7 +2,7 @@
 #
 #modify auto_reorient to use IMG_brain.nii as default?
 #
-# example : spmsuit.sh /shared/mrfil-data/pcamach2/spm_reorient/... /shared/mrfil-data/pcamach2/spm12 /shared/mrfil-data/pcamach2/spm12/toolbox/OldNorm auto_reorient suit_inc 'sub-FIB006' 'ses-01' /shared/mrfil-data/pcamach2/suit /shared/mrfil-data/pcamach2/spm_reorient/no_spm_reorient/derivatives/dtipipeline/
+# example : spmsuit.sh /shared/mrfil-data/pcamach2/spm_reorient/no_spm_reorient/derivatives/dtipipeline/sub-FIB006/ses-01/Analyze/MPRAGE /shared/mrfil-data/pcamach2/spm12 /shared/mrfil-data/pcamach2/spm12/toolbox/OldNorm auto_reorient suit_inc sub-FIB006 ses-01 /shared/mrfil-data/pcamach2/suit /shared/mrfil-data/pcamach2/spm_reorient/no_spm_reorient/derivatives/dtipipeline/
 
 #cd /shared/mrfil-data/pcamach2/spm_reorient/test/
 MPRAGEDIR=$1
