@@ -17,7 +17,7 @@
 source /scripts/connectome_variables_TEST_PRE.cfg
 
 sublist=$1
-
+session=$2
 mkdir ${DATA_DIR}
 
 export SCRIPTS_DIR
@@ -33,19 +33,19 @@ do
   export sub
   #ORIGINAL DATA LOCATION
   #location of DTI files
-  STUDY_DATDIR=${STUDY_DATA_DIR}/${sub}/ses-01/Analyze/${STUDY_DTIPTH}/
+  STUDY_DATDIR=${STUDY_DATA_DIR}/${sub}/${session}/Analyze/${STUDY_DTIPTH}/
   #location of bedpost directory
-  STUDY_BEDPOSTDIR=${RESULTS_DIR}/${sub}/ses-01/DTI.bedpostX/
+  STUDY_BEDPOSTDIR=${RESULTS_DIR}/${sub}/${session}/DTI.bedpostX/
   #location of freesurfer subject data
   STUDY_FSDIR=${STUDY_SUBJECTS_DIR}/
   #location of connectome output
-  STUDY_CONDIR=${RESULTS_DIR}/${sub}/ses-01/${STUDY_CONN_PATH}
+  STUDY_CONDIR=${RESULTS_DIR}/${sub}/${session}/${STUDY_CONN_PATH}
 
 #local TEMPORARY data locations for processing                                             
-  DATDIR=${DATA_DIR}/${sub}/ses-01/DTI/analyses/
-  RESDIR=${DATA_DIR}/${sub}/ses-01/ConnFSL
+  DATDIR=${DATA_DIR}/${sub}/${session}/DTI/analyses/
+  RESDIR=${DATA_DIR}/${sub}/${session}/ConnFSL
   FSDIR=${DATA_DIR}
-  DATBEDPOSTDIR=${DATA_DIR}/${sub}/ses-01/DTI/analyses.bedpostX/
+  DATBEDPOSTDIR=${DATA_DIR}/${sub}/${session}/DTI/analyses.bedpostX/
 
   # MOVE DATA OVER TO TEMP DIRECTORIES
   mkdir -p "${DATDIR}"
@@ -102,7 +102,7 @@ echo ${tester}
 export parcellation_image=${sub}_desc-aparcaseg_dseg.nii.gz
 echo ${parcellation_image}
 
-flirt -cost mutualinfo -dof 6 -in ${DATDIR}nodif_brain.nii.gz -ref ${STUDY_DATA_DIR}/${sub}/ses-01/Analyze/MPRAGE/IMG_brain.nii -omat FSdiff2rage.mat -out FSdiff_in_rage.nii.gz
+flirt -cost mutualinfo -dof 6 -in ${DATDIR}nodif_brain.nii.gz -ref ${STUDY_DATA_DIR}/${sub}/${session}/Analyze/MPRAGE/IMG_brain.nii -omat FSdiff2rage.mat -out FSdiff_in_rage.nii.gz
 convert_xfm -omat FSrage2diff.mat -inverse FSdiff2rage.mat
 flirt -interp nearestneighbour -in ${tester} -ref ${DATDIR}nodif_brain.nii.gz -applyxfm -init FSrage2diff.mat -out FS_to_DTI.nii.gz
 
@@ -122,7 +122,7 @@ cd ${RESDIR}
 
 cp ${SCRIPTS_DIR}/maskCat ${RESDIR}/DTIMASK/
 
-SUITS_parc_file=${STUDY_DATA_DIR}/${sub}/ses-01/Analyze/MPRAGE/iw_Lobules-SUIT_u_a_IMG_brain_seg1.nii
+SUITS_parc_file=${STUDY_DATA_DIR}/${sub}/${session}/Analyze/MPRAGE/iw_Lobules-SUIT_u_a_IMG_brain_seg1.nii
 echo ${SUITS_parc_file}
 SUITS_names=${SCRIPTS_DIR}/SUIT_ROI_names.txt
 SUITS_offset=3000
@@ -146,7 +146,7 @@ cd ${DTIFScatDIR}
 
 cd ${RESDIR}
 
-flirt -cost mutualinfo -dof 6 -in ${DATDIR}nodif_brain.nii.gz -ref ${STUDY_DATA_DIR}/${sub}/ses-01/Analyze/MPRAGE/IMG_brain.nii -omat diff2rage.mat -out diff_in_rage.nii.gz  
+flirt -cost mutualinfo -dof 6 -in ${DATDIR}nodif_brain.nii.gz -ref ${STUDY_DATA_DIR}/${sub}/${session}/Analyze/MPRAGE/IMG_brain.nii -omat diff2rage.mat -out diff_in_rage.nii.gz  
 convert_xfm -omat rage2diff.mat -inverse diff2rage.mat
 flirt -interp nearestneighbour -in ${SUITS_parc_file} -ref ${DATDIR}nodif_brain.nii.gz -applyxfm -init rage2diff.mat -out cereb_atlas_DTI.nii.gz
 
