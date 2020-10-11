@@ -1,0 +1,5 @@
+<StructConFSL_Doc>
+  <date>2020-10-11</date>
+  <body>Structural Connectivity pipeline based on FSL's bedpostx and probtrack2.0, with ROIs defined by the Desikan-Killiany atlas Freesurfer recon-all parcellation as run in fMRIPrep v20.2.0</body>
+  <body>further detailed description</body>
+</StructConFSL_Doc>
