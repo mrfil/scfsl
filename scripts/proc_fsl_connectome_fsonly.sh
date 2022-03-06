@@ -68,11 +68,11 @@ do
   cd ${RESDIR}
   mkdir -p "${RESDIR}/DTIMASK"
   #copy files from qsiprep fsl reorient to DATADIR
-  cp ${STUDY_QSIPREPDIR}/${sub}_${session}_run-1_space-T1w_desc-preproc_dwi.bval ${DATDIR}/${sub}/${session}/bvals
-  cp ${STUDY_QSIPREPDIR}/${sub}_${session}_run-1_space-T1w_desc-preproc_dwi.bvec ${DATDIR}/${sub}/${session}/bvecs
-  cp ${STUDY_QSIPREPDIR}/${sub}_${session}_run-1_space-T1w_desc-preproc_dwi.nii.gz ${DATDIR}/${sub}/${session}/data.nii.gz
-  cp ${STUDY_QSIPREPDIR}/${sub}_${session}_run-1_space-T1w_desc-brain_mask.nii.gz ${DATDIR}/${sub}/${session}/nodif_brain_mask.nii.gz
-  cp ${STUDY_QSIPREPDIR}/${sub}_${session}_run-1_space-T1w_desc-dwiref.nii.gz ${DATDIR}/${sub}/${session}/dwiref.nii.gz
+  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_dwi.bval ${DATDIR}/${sub}/${session}/bvals
+  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_dwi.bvec ${DATDIR}/${sub}/${session}/bvecs
+  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_dwi.nii.gz ${DATDIR}/${sub}/${session}/data.nii.gz
+  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-brain_mask.nii.gz ${DATDIR}/${sub}/${session}/nodif_brain_mask.nii.gz
+  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-dwiref.nii.gz ${DATDIR}/${sub}/${session}/dwiref.nii.gz
   #mask dwiref with brain mask to make ${DATDIR}/${sub}/${session}/nodif_brain.nii.gz
   fslmaths ${DATDIR}/${sub}/${session}/dwiref.nii.gz -mas ${DATDIR}/${sub}/${session}/nodif_brain_mask.nii.gz ${DATDIR}/${sub}/${session}/nodif_brain.nii.gz 
   #copy Freesurfer preproc T1w to tmp processing dir
