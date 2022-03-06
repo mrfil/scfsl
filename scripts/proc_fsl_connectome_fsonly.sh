@@ -72,7 +72,7 @@ do
   cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_dwi.bvec ${DATDIR}/${sub}/${session}/bvecs
   cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_dwi.nii.gz ${DATDIR}/${sub}/${session}/data.nii.gz
   cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-brain_mask.nii.gz ${DATDIR}/${sub}/${session}/nodif_brain_mask.nii.gz
-  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-dwiref.nii.gz ${DATDIR}/${sub}/${session}/dwiref.nii.gz
+  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_dwiref.nii.gz ${DATDIR}/${sub}/${session}/dwiref.nii.gz
   #mask dwiref with brain mask to make ${DATDIR}/${sub}/${session}/nodif_brain.nii.gz
   fslmaths ${DATDIR}/${sub}/${session}/dwiref.nii.gz -mas ${DATDIR}/${sub}/${session}/nodif_brain_mask.nii.gz ${DATDIR}/${sub}/${session}/nodif_brain.nii.gz 
   #copy Freesurfer preproc T1w to tmp processing dir
@@ -102,9 +102,9 @@ echo $RESDIR >> resdir.txt
 
 
 
-tester=${STUDY_FSDIR}${sub}/anat/${sub}_${session}_acq-m2prageunidenoised_desc-aparcaseg_dseg.nii.gz
+tester=${STUDY_FSDIR}${sub}/${session}/anat/${sub}_${session}_acq-m2prageunidenoised_desc-aparcaseg_dseg.nii.gz
 echo ${tester}
-export parcellation_image=${sub}_desc-aparcaseg_dseg.nii.gz
+export parcellation_image=${sub}_${session}_acq-m2prageunidenoised_desc-aparcaseg_dseg.nii.gz
 echo ${parcellation_image}
 
 flirt -cost mutualinfo -dof 6 -in ${DATDIR}/nodif_brain.nii.gz -ref ${DATDIR}/${sub}/${session}/IMG_brain.nii.gz -omat diff2rage.mat -out diff_in_rage.nii.gz
