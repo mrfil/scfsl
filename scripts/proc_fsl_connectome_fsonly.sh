@@ -76,7 +76,7 @@ do
   #mask dwiref with brain mask to make ${DATDIR}/${sub}/${session}/nodif_brain.nii.gz
   fslmaths ${DATDIR}/${sub}/${session}/dwiref.nii.gz -mas ${DATDIR}/${sub}/${session}/nodif_brain_mask.nii.gz ${DATDIR}/${sub}/${session}/nodif_brain.nii.gz 
   #copy Freesurfer preproc T1w to tmp processing dir
-  cp ${STUDY_FSDIR}${sub}/${session/}anat/${sub}_${session}_acq-m2prageunidenoised_desc-preproc_T1w.nii.gz ${DATDIR}/${sub}/${session}/IMG_brain.nii.gz
+  cp ${STUDY_FSDIR}${sub}/${session}/anat/${sub}_${session}_acq-m2prageunidenoised_desc-preproc_T1w.nii.gz ${DATDIR}/${sub}/${session}/IMG_brain.nii.gz
 
 echo ${DATA_DIR}                                                                                                           
 echo ${SCRIPTS_DIR}
