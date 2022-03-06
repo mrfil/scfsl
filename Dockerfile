@@ -72,6 +72,10 @@ RUN apt-get update -qq \
            libxt6 \
            sudo \
            wget \
+           python2.7 \
+           python-pip \
+           nano \
+           python-numpy \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && echo "Downloading FSL ..." \
@@ -103,5 +107,7 @@ RUN echo '{ \
 
 # Add conda to path
 ENV PATH="/opt/fsl-6.0.5.1/fslpython/condabin:/opt/fsl-6.0.5.1/fslpython/bin:${PATH}" 
+
+RUN pip install etelemetry nipype
 
 COPY scripts /scripts
