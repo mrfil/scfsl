@@ -7,6 +7,12 @@ Further analysis can be performed on data processed in this manner using other B
 
 Subject IDs should be set to three letters and three numbers (e.g. SUB001) when inputting to HeuDiConv for out of the box compatibility with these scripts.
 
-This pipeline should be run in the following order after HeuDiConv, fmriprep, and MRIQC have been run on the data: pcamach2/mridti, registration of SUIT cerebellar atlas to T1w space in SPM MATLAB, pcamach2/scfsl.
+This pipeline should be run after HeuDiConv, fmriprep, and QSIPrep preprocessing + reorient_fslstd recon have been run on the data.
 
-Freesurfer only version finishes in ~5-6 hours on the cluster through slurm
+##Docker build##
+
+docker build -t scfsl_gpu:0.1.0 .
+
+##Docker run command##
+
+docker run --gpus all -v /path/to/bids:/data scfsl_gpu:0.1.0 /scripts/proc_fsl_connectome_fsonly.sh subject session
