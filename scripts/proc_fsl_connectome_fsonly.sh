@@ -102,9 +102,9 @@ echo $RESDIR >> resdir.txt
 
 
 
-tester=${STUDY_FSDIR}${sub}/${session}/anat/${sub}_${session}_acq-m2prageunidenoised_desc-aparcaseg_dseg.nii.gz
+tester=${STUDY_FSDIR}${sub}/${session}/anat/${sub}_${session}_acq-mp2rageunidenoised_desc-aparcaseg_dseg.nii.gz
 echo ${tester}
-export parcellation_image=${sub}_${session}_acq-m2prageunidenoised_desc-aparcaseg_dseg.nii.gz
+export parcellation_image=${sub}_${session}_acq-mp2rageunidenoised_desc-aparcaseg_dseg.nii.gz
 echo ${parcellation_image}
 
 flirt -cost mutualinfo -dof 6 -in ${DATDIR}/nodif_brain.nii.gz -ref ${DATDIR}/${sub}/${session}/IMG_brain.nii.gz -omat diff2rage.mat -out diff_in_rage.nii.gz
