@@ -107,7 +107,7 @@ echo ${tester}
 export parcellation_image=${sub}_${session}_acq-mp2rageunidenoised_desc-aparcaseg_dseg.nii.gz
 echo ${parcellation_image}
 
-flirt -cost mutualinfo -dof 6 -in ${DATDIR}/nodif_brain.nii.gz -ref ${DATDIR}/${sub}/${session}/IMG_brain.nii.gz -omat diff2rage.mat -out diff_in_rage.nii.gz
+flirt -cost mutualinfo -dof 6 -in ${DATDIR}/${sub}/${session}/nodif_brain.nii.gz -ref ${DATDIR}/${sub}/${session}/IMG_brain.nii.gz -omat diff2rage.mat -out diff_in_rage.nii.gz
 convert_xfm -omat rage2diff.mat -inverse diff2rage.mat
 flirt -interp nearestneighbour -in ${tester} -ref ${DATDIR}/nodif_brain.nii.gz -applyxfm -init rage2diff.mat -out FS_to_DTI.nii.gz
 
