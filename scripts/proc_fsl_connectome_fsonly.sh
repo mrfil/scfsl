@@ -49,7 +49,6 @@ do
   DATDIR=${DATA_DIR}/${sub}/${session}/DTI/analyses
   RESDIR=${DATA_DIR}/${sub}/${session}/ConnFSL
   FSDIR=${DATA_DIR}
-  QSIPREPDIR=${DATA_DIR}/${sub}/${session}/qsiprep_out/
   DATBEDPOSTDIR=${DATA_DIR}/${sub}/${session}/DTI/analyses.bedpostX/
 
   # MOVE DATA OVER TO TEMP DIRECTORIES
@@ -67,14 +66,15 @@ do
   mkdir -p "${RESDIR}"
   cd ${RESDIR}
   mkdir -p "${RESDIR}/DTIMASK"
-  #copy files from qsiprep fsl reorient to DATADIR
-  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_dwi.bval ${DATDIR}/bvals
-  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_dwi.bvec ${DATDIR}/bvecs
-  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_dwi.nii.gz ${DATDIR}/data.nii.gz
-  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-brain_mask.nii.gz ${DATDIR}/nodif_brain_mask.nii.gz
-  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_dwiref.nii.gz ${DATDIR}/dwiref.nii.gz
-  #mask dwiref with brain mask to make ${DATDIR}/nodif_brain.nii.gz
-  fslmaths ${DATDIR}/dwiref.nii.gz -mas ${DATDIR}/nodif_brain_mask.nii.gz ${DATDIR}/nodif_brain.nii.gz 
+  #copy files from qsirecon fsl reorient to DATADIR
+  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_dwi.bval ${DATDIR}/bvals
+  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_dwi.bvec ${DATDIR}/bvecs
+  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_dwi.nii.gz ${DATDIR}/data.nii.gz
+  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_mask.nii.gz ${DATDIR}/nodif_brain_mask.nii.gz
+  #mask get nodif from qsiprep preproc dwi and brain extract with qsirecon brain mask to make ${DATDIR}/nodif_brain.nii.gz
+  fslroi ${DATDIR}/data.nii.gz ${DATDIR}/nodif.nii.gz 0 1
+  fslmaths ${DATDIR}/nodif.nii.gz -mas ${DATDIR}/nodif_brain_mask.nii.gz ${DATDIR}/nodif_brain.nii.gz 
+  
   #copy Freesurfer preproc T1w to tmp processing dir
   cp ${STUDY_FSDIR}${sub}/${session}/anat/${sub}_${session}_acq-mp2rageunidenoised_desc-preproc_T1w.nii.gz ${DATDIR}/IMG_brain.nii.gz
 
@@ -124,11 +124,6 @@ source ${SCRIPTS_DIR}/CSF_mask.sh
 python ${SCRIPTS_DIR}/Freesurfer_ROIs_fsonly.py
 
 cd ${RESDIR}
-
-fslmaths Left-Cerebellar-Cortex.nii.gz -mas ${SCRIPTS_DIR}/not_cereb.nii.gz Left-Cerebellar-Cortex.nii.gz
-fslmaths Right-Cerebellar-Cortex.nii.gz -mas ${SCRIPTS_DIR}/not_cereb.nii.gz Right-Cerebellar-Cortex.nii.gz
-fslstats Left-Cerebellar-Cortex.nii.gz -V > tmproivolumeL.txt
-fslstats Right-Cerebellar-Cortex.nii.gz -V > tmproivolumeR.txt
 
 cp ${SCRIPTS_DIR}/maskCat ${RESDIR}/DTIMASK/
 cd ${DATBEDPOSTDIR}
