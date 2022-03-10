@@ -16,12 +16,12 @@ and QSIPrep preprocessing + reorient_fslstd recon have been run on the data.
 ### Docker build
 
 ```
-docker build -t scfsl_gpu:0.1.0 .
+docker build -t scfsl_gpu:0.2.0 .
 ```
 
 Or pull the image from mrfilbi/scfsl_gpu:0.2.0 (or newest tag)
 
-##Docker run command##
+## Docker run command 
 
 ```
 docker run --gpus all -v /path/to/bids:/data mrfilbi/scfsl-gpu:0.2.0 /scripts/proc_fsl_connectome_fsonly.sh subject session
@@ -89,3 +89,5 @@ and ROI volume-weighted structural connectome.
 [x] successful run testing
 [x] example run times
 [x] describe outputs
+[] build CUDA 10.2 version
+[] test CUDA 10.2 version
