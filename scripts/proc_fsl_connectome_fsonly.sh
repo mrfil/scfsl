@@ -76,7 +76,7 @@ do
   fslmaths ${DATDIR}/nodif.nii.gz -mas ${DATDIR}/nodif_brain_mask.nii.gz ${DATDIR}/nodif_brain.nii.gz 
   
   #copy Freesurfer preproc T1w to tmp processing dir
-  cp ${STUDY_FSDIR}${sub}/${session}/anat/${sub}_${session}_acq-mp2rageunidenoised_desc-preproc_T1w.nii.gz ${DATDIR}/IMG_brain.nii.gz
+  cp ${STUDY_SUBJECTS_DIR}/${sub}/${session}/anat/${sub}_${session}_acq-mp2rageunidenoised_desc-preproc_T1w.nii.gz ${DATDIR}/IMG_brain.nii.gz
 
 echo ${DATA_DIR}                                                                                                           
 echo ${SCRIPTS_DIR}
@@ -102,7 +102,7 @@ echo $RESDIR >> resdir.txt
 
 
 
-tester=${STUDY_FSDIR}${sub}/${session}/anat/${sub}_${session}_acq-mp2rageunidenoised_desc-aparcaseg_dseg.nii.gz
+tester=${STUDY_SUBJECTS_DIR}/${sub}/${session}/anat/${sub}_${session}_acq-mp2rageunidenoised_desc-aparcaseg_dseg.nii.gz
 echo ${tester}
 export parcellation_image=${sub}_${session}_acq-mp2rageunidenoised_desc-aparcaseg_dseg.nii.gz
 echo ${parcellation_image}
