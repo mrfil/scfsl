@@ -16,21 +16,21 @@ and QSIPrep preprocessing + reorient_fslstd recon have been run on the data.
 ### Docker build
 
 ```
-docker build -t scfsl_gpu:0.1.0 .
+docker build -t scfsl_gpu:0.2.0 .
 ```
 
-Or pull the image from mrfilbi/scfsl_gpu:0.1.0 (or newest tag)
+Or pull the image from mrfilbi/scfsl_gpu:0.2.0 (or newest tag)
 
-##Docker run command##
+### Docker run command
 
 ```
-docker run --gpus all -v /path/to/bids:/data scfsl_gpu:0.1.0 /scripts/proc_fsl_connectome_fsonly.sh subject session
+docker run --gpus all -v /path/to/bids:/data scfsl_gpu:0.2.0 /scripts/proc_fsl_connectome_fsonly.sh subject session
 ```
 
 ### Singularity build
 
 ```
-singularity build scfsl_gpu-v0.1.2.sif docker://mrfilbi/scfsl_gpu:0.1.2
+singularity build scfsl_gpu-v0.2.0.sif docker://mrfilbi/scfsl_gpu:0.2.0
 ```
 
 ### Docker Example
@@ -45,7 +45,7 @@ pennbbl/qsiprep:0.15.1 /datain /datain/derivatives/ --recon-input /datain/deriva
 # Running SCFSL GPU tractography
  docker exec --gpus all -e LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-9.1/lib64 \
   -v /path/to/freesurfer/license.txt:/opt/freesurfer/license.txt \
-  -v /path/project/bids:/data mrfilbi/scfsl_gpu:0.1.2 /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
+  -v /path/project/bids:/data mrfilbi/scfsl_gpu:0.2.0 /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
 
 
 ```
@@ -61,7 +61,7 @@ singularity run --nv -B /path/project/bids:/datain,/path/to/freesurfer/license.t
 # Running SCFSL GPU tractography
 SINGULARITY_ENVLD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-9.1/lib64 \
 singularity exec --nv -B /path/to/freesurfer/license.txt:/opt/freesurfer/license.txt,/path/project/bids:/data \
-/path/to/scfsl_gpu-v0.1.2.sif /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
+/path/to/scfsl_gpu-v0.2.0.sif /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
 
 ```
 
