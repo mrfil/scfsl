@@ -11,26 +11,26 @@ This portion of the pipeline should be run after HeuDiConv, fmriprep,
 and QSIPrep preprocessing + reorient_fslstd recon have been run on the data.
 
 *The following examples use the CUDA 9.1 toolkit and runtime (loaded via module or native install)
-*Support for CUDA 10.2 is in development
+*Support for CUDA 10.2 is in development in this branch
 
 ### Docker build
 
 ```
-docker build -t scfsl_gpu:0.1.0 .
+docker build -t scfsl_gpu:0.3.0 .
 ```
 
-Or pull the image from mrfilbi/scfsl_gpu:0.1.0 (or newest tag)
+Or pull the image from mrfilbi/scfsl_gpu:0.3.0 (or newest tag)
 
 ##Docker run command##
 
 ```
-docker run --gpus all -v /path/to/bids:/data scfsl_gpu:0.1.0 /scripts/proc_fsl_connectome_fsonly.sh subject session
+docker run --gpus all -v /path/to/bids:/data scfsl_gpu:0.3.0 /scripts/proc_fsl_connectome_fsonly.sh subject session
 ```
 
 ### Singularity build
 
 ```
-singularity build scfsl_gpu-v0.1.2.sif docker://mrfilbi/scfsl_gpu:0.1.2
+singularity build scfsl_gpu-v0.3.0.sif docker://mrfilbi/scfsl_gpu:0.3.0
 ```
 
 ### Docker Example
@@ -45,7 +45,7 @@ pennbbl/qsiprep:0.15.1 /datain /datain/derivatives/ --recon-input /datain/deriva
 # Running SCFSL GPU tractography
  docker exec --gpus all -e LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-9.1/lib64 \
   -v /path/to/freesurfer/license.txt:/opt/freesurfer/license.txt \
-  -v /path/project/bids:/data mrfilbi/scfsl_gpu:0.1.2 /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
+  -v /path/project/bids:/data mrfilbi/scfsl_gpu:0.3.0 /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
 
 
 ```
@@ -62,7 +62,7 @@ singularity run --nv -B /path/project/bids:/datain,/path/to/freesurfer/license.t
 # Running SCFSL GPU tractography
 SINGULARITY_ENVLD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-9.1/lib64 \
 singularity exec --nv -B /path/to/freesurfer/license.txt:/opt/freesurfer/license.txt,/path/project/bids:/data \
-/path/to/scfsl_gpu-v0.1.2.sif /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
+/path/to/scfsl_gpu-v0.3.0.sif /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
 
 ```
 
@@ -88,4 +88,4 @@ and ROI volume-weighted structural connectome.
 [x] resolve error in mask dimensions error
 [x] successful run testing
 [x] example run times
-[] describe outputs
+[x] describe outputs
