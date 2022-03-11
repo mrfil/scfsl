@@ -3,9 +3,10 @@
 # a script to generate the array of subject numbers to be allocated to sbatch processing task IDs
 
 #project directory
-project=/path/to/PROJECT
+project=/projects/BICpipeline/Pipeline_Pilot/TestingFork/MBB
 
-pref=`echo ${project} | cut -d/ -f3`
+#subject prefix
+pref="MBB"
 
 cd $project
 
