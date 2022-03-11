@@ -1,17 +1,13 @@
 # scfsl
-FSL-based structural connectivity pipeline (WIP)
+FSL-based structural connectivity pipeline
 
-Modified version of original pipeline to run as a sub-pipeline of our HPC pipelines with BIDS compatibility achieved with HeuDiConv. 
-Preprocessing and Freesurfer parcellation added from fMRIPrep. 
-MRIQC is run on HeuDiConv BIDS derivatives for quality control.
+Modified version of original pipeline to run with BIDS compatibility achieved with HeuDiConv. Preprocessing and Freesurfer parcellation added from fMRIPrep. MRIQC is run on HeuDiConv BIDS derivatives for quality control.
 
-## Prerequisites
+Further analysis can be performed on data processed in this manner using other BIDS apps.
 
-This portion of the pipeline should be run after HeuDiConv, fmriprep, 
-and QSIPrep preprocessing + reorient_fslstd recon have been run on the data.
+Subject IDs should be set to three letters and three numbers (e.g. SUB001) when inputting to HeuDiConv for out of the box compatibility with these scripts.
 
-*The following examples use the CUDA 9.1 toolkit and runtime (loaded via module or native install)
-*Support for CUDA 10.2 is in development
+This pipeline should be run in the following order after HeuDiConv, fmriprep, and MRIQC have been run on the data: pcamach2/mridti, registration of SUIT cerebellar atlas to T1w space in SPM MATLAB, pcamach2/scfsl.
 
 ### Docker build
 
@@ -91,3 +87,4 @@ and ROI volume-weighted structural connectome.
 [x] describe outputs
 [] build CUDA 10.2 version
 [] test CUDA 10.2 version
+
