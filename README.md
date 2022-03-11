@@ -20,7 +20,11 @@ Or pull the image from mrfilbi/scfsl_gpu:0.2.0 (or newest tag)
 ## Docker run command 
 
 ```
+
+docker run --gpus all -v /path/to/bids:/data scfsl_gpu:0.2.0 /scripts/proc_fsl_connectome_fsonly.sh subject session
+
 docker run --gpus all -v /path/to/bids:/data mrfilbi/scfsl-gpu:0.2.0 /scripts/proc_fsl_connectome_fsonly.sh subject session
+
 ```
 
 ### Singularity build
