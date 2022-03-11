@@ -77,10 +77,10 @@ and ROI volume-weighted structural connectome.
 
 From initial testing (on two datasets):
 
-| OS (host)    | CUDA Version | GPU(s)                 | CPU(s)                                    | RAM    | Run time    |
-|--------------|:------------:|:----------------------:|:-----------------------------------------:|:------:|------------:|
-| CentOS       | 9.1          | Nvidia Tesla V100 16GB | Intel Xeon Gold 6138 2.00GHz (80 threads) | 192GB  | 20 minutes? |
-| CentOS       | 10.2         | Nvidia Tesla V100 16GB | Intel Xeon Gold 6138 2.00GHz (80 threads) | 192GB  | 30 minutes  |
+| OS (host)    | CUDA Version | GPU(s)                 | CPU(s)                                    | RAM    | Run time       |
+|--------------|:------------:|:----------------------:|:-----------------------------------------:|:------:|---------------:|
+| CentOS       | 9.1          | Nvidia Tesla V100 16GB | Intel Xeon Gold 6138 2.00GHz (80 threads) | 192GB  | 20-35 minutes? |
+| CentOS       | 10.2         | Nvidia Tesla V100 16GB | Intel Xeon Gold 6138 2.00GHz (80 threads) | 192GB  | 30-35 minutes  |
 
 Peak GPU memory usage: 14399MiB
 
