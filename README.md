@@ -50,7 +50,6 @@ pennbbl/qsiprep:0.15.1 /datain /datain/derivatives/ --recon-input /datain/deriva
 
 ```
 
-
 *You may need to set your CUDA toolkit version to 9.1 and set the environmental variable for LD_LIBRARY_PATH to run successfully*
 
 ### Singularity Example
@@ -88,4 +87,4 @@ and ROI volume-weighted structural connectome.
 [x] resolve error in mask dimensions error
 [x] successful run testing
 [x] example run times
-[] describe outputs
+[x] describe outputs
