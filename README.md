@@ -71,10 +71,12 @@ and ROI volume-weighted structural connectome.
 
 ## Performance
 
-| OS (host)    | CUDA Version | GPU(s)                    | CPU(s)                                    | RAM    | Run time   |
-|--------------|:------------:|:-------------------------:|:-----------------------------------------:|:------:|-----------:|
-| CentOS       | 9.1          | Nvidia Tesla V100 16GB x4 | Intel Xeon Gold 6138 2.00GHz (80 threads) | 192GB  | 20 minutes |
-| CentOS       | 10.2         | Nvidia Tesla V100 16GB x4 | Intel Xeon Gold 6138 2.00GHz (80 threads) | 192GB  | untested   |
+Running with 1.6 mm isotropic diffusion data from 7T
+
+| OS (host)    | CUDA Version | GPU(s)                 | CPU(s)                                    | RAM    | Run time   |
+|--------------|:------------:|:----------------------:|:-----------------------------------------:|:------:|-----------:|
+| CentOS       | 9.1          | Nvidia Tesla V100 16GB | Intel Xeon Gold 6138 2.00GHz (80 threads) | 192GB  | 20 minutes |
+| CentOS       | 10.2         | Nvidia Tesla V100 16GB | Intel Xeon Gold 6138 2.00GHz (80 threads) | 192GB  | untested   |
 
 
 ### To-do
@@ -85,6 +87,6 @@ and ROI volume-weighted structural connectome.
 [x] successful run testing
 [x] example run times
 [x] describe outputs
-[] build CUDA 10.2 version
+[x] build CUDA 10.2 version
 [] test CUDA 10.2 version
 
