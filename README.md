@@ -1,32 +1,36 @@
 # scfsl
-FSL-based structural connectivity pipeline
+FSL-based structural connectivity pipeline (WIP)
 
-Modified version of original pipeline to run with BIDS compatibility achieved with HeuDiConv. Preprocessing and Freesurfer parcellation added from fMRIPrep. MRIQC is run on HeuDiConv BIDS derivatives for quality control.
+Modified version of original pipeline to run as a sub-pipeline of our HPC pipelines with BIDS compatibility achieved with HeuDiConv. 
+Preprocessing and Freesurfer parcellation added from fMRIPrep. 
+MRIQC is run on HeuDiConv BIDS derivatives for quality control.
 
-Further analysis can be performed on data processed in this manner using other BIDS apps.
+## Prerequisites
 
-Subject IDs should be set to three letters and three numbers (e.g. SUB001) when inputting to HeuDiConv for out of the box compatibility with these scripts.
+This portion of the pipeline should be run after HeuDiConv, fmriprep, 
+and QSIPrep preprocessing + reorient_fslstd recon have been run on the data.
 
-This pipeline should be run in the following order after HeuDiConv, fmriprep, and MRIQC have been run on the data: pcamach2/mridti, registration of SUIT cerebellar atlas to T1w space in SPM MATLAB, pcamach2/scfsl.
+*The following examples use the CUDA 9.1 toolkit and runtime (loaded via module or native install)
+*Support for CUDA 10.2 is in development
 
 ### Docker build
 
 ```
-docker build -t scfsl_gpu:0.2.0 .
+docker build -t scfsl_gpu:0.1.0 .
 ```
 
-Or pull the image from mrfilbi/scfsl_gpu:0.2.0 (or newest tag)
+Or pull the image from mrfilbi/scfsl_gpu:0.1.0 (or newest tag)
 
-## Docker run command 
+##Docker run command##
 
 ```
-docker run --gpus all -v /path/to/bids:/data mrfilbi/scfsl-gpu:0.2.0 /scripts/proc_fsl_connectome_fsonly.sh subject session
+docker run --gpus all -v /path/to/bids:/data scfsl_gpu:0.1.0 /scripts/proc_fsl_connectome_fsonly.sh subject session
 ```
 
 ### Singularity build
 
 ```
-singularity build scfsl_gpu-v0.2.0.sif docker://mrfilbi/scfsl_gpu:0.2.0
+singularity build scfsl_gpu-v0.1.2.sif docker://mrfilbi/scfsl_gpu:0.1.2
 ```
 
 ### Docker Example
@@ -41,11 +45,10 @@ pennbbl/qsiprep:0.15.1 /datain /datain/derivatives/ --recon-input /datain/deriva
 # Running SCFSL GPU tractography
  docker exec --gpus all -e LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-9.1/lib64 \
   -v /path/to/freesurfer/license.txt:/opt/freesurfer/license.txt \
-  -v /path/project/bids:/data mrfilbi/scfsl_gpu:0.2.0 /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
+  -v /path/project/bids:/data mrfilbi/scfsl_gpu:0.1.2 /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
 
 
 ```
-
 
 *You may need to set your CUDA toolkit version to 9.1 and set the environmental variable for LD_LIBRARY_PATH to run successfully*
 
@@ -58,7 +61,7 @@ singularity run --nv -B /path/project/bids:/datain,/path/to/freesurfer/license.t
 # Running SCFSL GPU tractography
 SINGULARITY_ENVLD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-9.1/lib64 \
 singularity exec --nv -B /path/to/freesurfer/license.txt:/opt/freesurfer/license.txt,/path/project/bids:/data \
-/path/to/scfsl_gpu-v0.2.0.sif /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
+/path/to/scfsl_gpu-v0.1.2.sif /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
 
 ```
 
@@ -85,6 +88,3 @@ and ROI volume-weighted structural connectome.
 [x] successful run testing
 [x] example run times
 [x] describe outputs
-[] build CUDA 10.2 version
-[] test CUDA 10.2 version
-

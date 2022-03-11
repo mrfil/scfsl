@@ -3,17 +3,9 @@
 import os
 import nipype.interfaces.fsl as fsl
 import csv
-#from ConfigParser import ConfigParser as CFP
 
-#get parcellation number from connectome config file
-#get_config=CFP()
-#get_config.readfp(open('{}/connectome_variables.cfg'.format(os.environ['SCRIPTS_DIR'])))
-#parcellation_num=int(get_config.get('PARC_SCHEMES','parcellation_number'))
-#parcellation_labels_file=get_config.get('PARC_SCHEMES','parcellation_labels_file')
 parcellation_num = int(os.environ['parcellation_number'])
 parcellation_labels_file = os.environ['parcellation_labels_file']
-
-
 
 Freesurfer_Regions_dict = {}
 Freesurfer_Regions_list=[]
@@ -50,13 +42,6 @@ for index in range(parcellation_num):           # index goes 1:70
 
 	#get volume
 	current_ROI_file='{}.nii.gz'.format(Freesurfer_Regions_list[index])
-	#crop cerebellar cortex rois	
-	if index == 1:
-		fslroi = fsl.ExtractROI(in_file=current_ROI_file, roi_file=current_ROI_file, x_min=46, x_size=22, y_min=16, y_size=24, z_min=9, z_size=22)
-		fslroi.run()
-	elif index == 9:
-		fslroi = fsl.ExtractROI(in_file=current_ROI_file, roi_file=current_ROI_file, x_min=25, x_size=22, y_min=16, y_size=24, z_min=9, z_size=22)
-		fslroi.run()
 
 	get_volume_ROI = fsl.ImageStats(in_file=current_ROI_file, op_string='-V > ROI_volumes.txt')
 	get_volume_ROI.run()

@@ -1,1 +1,1 @@
-Run the singularity image scfsl and bind the scripts folder within this directory as /scripts on the container
+Run the singularity image scfsl built from the Docker image and bind the data folder as /data
