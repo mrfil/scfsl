@@ -2,12 +2,9 @@
 # https://github.com/ReproNim/neurodocker
 
 # https://ngc.nvidia.com/catalog/containers/nvidia:cuda
-#ARG CUDA_VERSION=9.1-cudnn7-devel
-
-# old - 9.1-cudnn7-runtime-ubuntu16.04
+# old version used - 9.1-cudnn7-runtime-ubuntu16.04
 ARG CUDA_VERSION=10.2-cudnn7-runtime-ubuntu18.04
 FROM nvcr.io/nvidia/cuda:10.2-cudnn7-runtime-ubuntu18.04
-# FROM nvcr.io/nvidia/tensorflow:21.08-tf2-py3
 
 USER root
 

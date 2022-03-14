@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #Created by Paul Sharp and Brad Sutton 12-21-2016
+# Adapted by Paul B Camacho
 
 # This batch file grabs the DTI and freesurfer data from AWS or a network drive
 

@@ -15,6 +15,8 @@
 # !!!!!!!!   THERE IS A RM -RF SUBJECT_DIR
 #
 # This one just uses freesurfer parcs
+#
+# Adapted by Paul B Camacho for use with QSIPrep preprocessing and CUDA acceleration
 
 source /scripts/connectome_variables_fsonly.cfg
 

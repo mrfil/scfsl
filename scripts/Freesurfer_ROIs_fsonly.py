@@ -3,13 +3,7 @@
 import os
 import nipype.interfaces.fsl as fsl
 import csv
-#from ConfigParser import ConfigParser as CFP
 
-#get parcellation number from connectome config file
-#get_config=CFP()
-#get_config.readfp(open('{}/connectome_variables.cfg'.format(os.environ['SCRIPTS_DIR'])))
-#parcellation_num=int(get_config.get('PARC_SCHEMES','parcellation_number'))
-#parcellation_labels_file=get_config.get('PARC_SCHEMES','parcellation_labels_file')
 parcellation_num = int(os.environ['parcellation_number'])
 parcellation_labels_file = os.environ['parcellation_labels_file']
 
