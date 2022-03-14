@@ -1,0 +1,6 @@
+a BIDS-compatible singularity version of the StructConFSL pipeline that includes the SUIT cerebellar lobules parcellation integrated with the desikan-killiany atlas Freesurfer parcellation. Processing on one headnode completes in under 11 hours. The cl entries are as follows (these commands were used on the same test set from PEA that ran through mridti.simg processing, followed by SPM reorientation and SUIT atlas registration to the MPRAGE IMG_brain.nii, the products of which were pushed back to the cluster in their ../BIDS/derivatives/dtipipeline/subject/session/Analyze/MPRAGE directory of origin):
+ 
+
+cd /projects/BICpipeline/Pipeline_Pilot/TestingFork/SCFSL_PEA
+export subjects="sub-2528"
+singularity run --bind ./scripts:/scripts --bind ../PEA_tutorial/BIDS:/data ../scfsl.simg /scripts/proc_fsl_connectomePRE_TEST.sh

@@ -7,8 +7,6 @@ import csv
 parcellation_num = int(os.environ['parcellation_number'])
 parcellation_labels_file = os.environ['parcellation_labels_file']
 
-
-
 Freesurfer_Regions_dict = {}
 Freesurfer_Regions_list=[]
 
