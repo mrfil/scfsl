@@ -25,7 +25,7 @@ Or pull the image from mrfilbi/scfsl_gpu:0.3.0 (or newest tag)
 ### Docker run command
 
 ```
-docker run --gpus all -v /path/to/bids:/data scfsl_gpu:0.3.0 /scripts/proc_fsl_connectome_fsonly.sh subject session
+docker run --gpus all -v /path/to/bids:/data mrfilbi/scfsl_gpu:0.3.0 /scripts/proc_fsl_connectome_fsonly.sh subject session
 
 ```
 
@@ -49,8 +49,6 @@ pennbbl/qsiprep:0.15.1 /datain /datain/derivatives/ --recon-input /datain/deriva
  docker exec --gpus all -e LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-9.1/lib64 \
   -v /path/to/freesurfer/license.txt:/opt/freesurfer/license.txt \
   -v /path/project/bids:/data mrfilbi/scfsl_gpu:0.3.0 /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
-
-
 
 ```
 
