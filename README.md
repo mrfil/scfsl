@@ -10,8 +10,7 @@ MRIQC is run on HeuDiConv BIDS derivatives for quality control.
 This portion of the pipeline should be run after HeuDiConv, fmriprep, 
 and QSIPrep preprocessing + reorient_fslstd recon have been run on the data.
 
-*The following examples use the CUDA 9.1 toolkit and runtime (loaded via module or native install)
-*Support for CUDA 10.2 is in development in this branch
+The following examples use the CUDA 10.2 toolkit and runtime (loaded via module or native install)
 
 ### Docker build
 
@@ -80,7 +79,6 @@ From initial testing (on 23 datasets from 7T 1.6mm isotropic CMRR DWI):
 
 | OS (host)    | CUDA Version | GPU(s)                 | CPU(s)                                    | RAM    | Run time       |
 |--------------|:------------:|:----------------------:|:-----------------------------------------:|:------:|---------------:|
-| CentOS       | 9.1          | Nvidia Tesla V100 16GB | Intel Xeon Gold 6138 2.00GHz (80 threads) | 192GB  | 30-35 minutes  |
 | CentOS       | 10.2         | Nvidia Tesla V100 16GB | Intel Xeon Gold 6138 2.00GHz (80 threads) | 192GB  | 30-35 minutes  |
 
 Peak GPU memory usage: 14435MiB / 16160MiB
