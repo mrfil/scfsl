@@ -83,4 +83,11 @@ From initial testing (on 23 datasets from 7T 1.6mm isotropic CMRR DWI):
 
 Peak GPU memory usage: 14435MiB / 16160MiB
 
+From testing 30 datasets from 3T 2.0mm isotropic CMRR DWI):
+
+| OS (host)    | CUDA Version | GPU(s)                 | CPU(s)                                    | RAM    | Run time       |
+|--------------|:------------:|:----------------------:|:-----------------------------------------:|:------:|---------------:|
+| CentOS       | 9.1          | Nvidia Tesla V100 16GB | Intel Xeon Gold 6138 2.00GHz (80 threads) | 192GB  | 25-30 minutes  |
+
+Peak GPU memory usage: 13999MiB / 16160MiB
 
