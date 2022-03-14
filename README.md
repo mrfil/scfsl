@@ -79,7 +79,7 @@ From initial testing (on 23 datasets from 7T 1.6mm isotropic CMRR DWI):
 
 | OS (host)    | CUDA Version | GPU(s)                 | CPU(s)                                    | RAM    | Run time       |
 |--------------|:------------:|:----------------------:|:-----------------------------------------:|:------:|---------------:|
-| CentOS       | 10.2         | Nvidia Tesla V100 16GB | Intel Xeon Gold 6138 2.00GHz (80 threads) | 192GB  | 30-35 minutes  |
+| CentOS       | 9.1          | Nvidia Tesla V100 16GB | Intel Xeon Gold 6138 2.00GHz (80 threads) | 192GB  | 30-35 minutes  |
 
 Peak GPU memory usage: 14435MiB / 16160MiB
 
