@@ -77,8 +77,16 @@ do
   fslroi ${DATDIR}/data.nii.gz ${DATDIR}/nodif.nii.gz 0 1
   fslmaths ${DATDIR}/nodif.nii.gz -mas ${DATDIR}/nodif_brain_mask.nii.gz ${DATDIR}/nodif_brain.nii.gz 
   
-  #copy Freesurfer preproc T1w to tmp processing dir
-  cp ${STUDY_SUBJECTS_DIR}/${sub}/${session}/anat/${sub}_${session}_acq-mp2rageunidenoised_desc-preproc_T1w.nii.gz ${DATDIR}/IMG_brain.nii.gz
+  
+  #Find native space preprocessed T1w and aparcaseg_dseg from fMRIPrep
+  cd ${STUDY_SUBJECTS_DIR}/${sub}/${session}/anat
+  #get only the first image - this is the non-MNI space image
+  preproc=$(ls ${sub}_${session}*_desc-preproc_T1w.nii.gz | head -n 1)
+  echo "Using ${preproc} as IMG_brain"
+  parc=$(ls ${sub}_${session}*_desc-aparcaseg_dseg.nii.gz | head -n 1)
+  echo "Using ${parc} as Freesurfer parcellation image"
+  #copy preproc T1w to tmp processing dir
+  cp ${preproc} ${DATDIR}/IMG_brain.nii.gz
 
 echo ${DATA_DIR}                                                                                                           
 echo ${SCRIPTS_DIR}
@@ -102,20 +110,17 @@ echo $RESDIR
 echo $FREESURFER_HOME
 echo $RESDIR >> resdir.txt
 
-
-
-tester=${STUDY_SUBJECTS_DIR}/${sub}/${session}/anat/${sub}_${session}_acq-mp2rageunidenoised_desc-aparcaseg_dseg.nii.gz
-echo ${tester}
-export parcellation_image=${sub}_${session}_acq-mp2rageunidenoised_desc-aparcaseg_dseg.nii.gz
+parcs=${STUDY_SUBJECTS_DIR}/${sub}/${session}/anat/${parc}
+export parcellation_image=${parc}
 echo ${parcellation_image}
 
 flirt -cost mutualinfo -dof 6 -in ${DATDIR}/nodif_brain.nii.gz -ref ${DATDIR}/IMG_brain.nii.gz -omat diff2rage.mat -out diff_in_rage.nii.gz
 convert_xfm -omat rage2diff.mat -inverse diff2rage.mat
-flirt -interp nearestneighbour -in ${tester} -ref ${DATDIR}/nodif_brain.nii.gz -applyxfm -init rage2diff.mat -out FS_to_DTI.nii.gz
+flirt -interp nearestneighbour -in ${parcs} -ref ${DATDIR}/nodif_brain.nii.gz -applyxfm -init rage2diff.mat -out FS_to_DTI.nii.gz
 
 cd ${RESDIR}  # should still be in there, but just to make sure                                                      
 
-# echo "Running Bedpost"
+# echo "Running Bedpost with -n 3"
 bedpostx_gpu "$DATDIR" -n 3
 
 # create CSF mask
