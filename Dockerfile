@@ -57,6 +57,7 @@ RUN apt-get update -qq \
            bc \
            dc \
            file \
+           unzip \
            libfontconfig1 \
            libfreetype6 \
            libgl1-mesa-dev \
@@ -89,21 +90,14 @@ RUN apt-get update -qq \
     && echo "Installing FSL conda environment ..." \
     && bash /opt/fsl-6.0.5.1/etc/fslconf/fslpython_install.sh -f /opt/fsl-6.0.5.1
 
-RUN echo '{ \
-    \n  "pkg_manager": "apt", \
-    \n  "instructions": [ \
-    \n    [ \
-    \n      "base", \
-    \n      "debian:stretch" \
-    \n    ], \
-    \n    [ \
-    \n      "fsl", \
-    \n      { \
-    \n        "version": "6.0.3" \
-    \n      } \
-    \n    ] \
-    \n  ] \
-    \n}' > /neurodocker/neurodocker_specs.json
+RUN mkdir /opt/bedpostx_gpu_cuda10.2 && mkdir /opt/probtrackx2_gpu_cuda10.2 && cd /opt/bedpostx_gpu_cuda10.2 \
+   && wget https://users.fmrib.ox.ac.uk/~moisesf/Bedpostx_GPU/FSL_6/CUDA_10.2/bedpostx_gpu.zip \
+   && unzip bedpostx_gpu.zip && rm bedpostx_gpu.zip \
+   && mv /opt/bedpostx_gpu_cuda10.2/lib/* /opt/fsl-6.0.5.1/lib/ \
+   && mv /opt/bedpostx_gpu_cuda10.2/bin/* /opt/fsl-6.0.5.1/bin/ \
+   && wget https://users.fmrib.ox.ac.uk/~moisesf/Probtrackx_GPU/FSL_6/CUDA_10.2/probtrackx2_gpu.zip \
+   && unzip probtrackx2_gpu.zip && rm probtrackx2_gpu.zip \
+   && mv /opt/probtrackx2_gpu_cuda10.2/* /opt/fsl-6.0.5.1/bin/
 
 # Add conda to path
 ENV PATH="/opt/fsl-6.0.5.1/fslpython/condabin:/opt/fsl-6.0.5.1/fslpython/bin:${PATH}" 
