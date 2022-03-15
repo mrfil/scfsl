@@ -45,7 +45,7 @@ pennbbl/qsiprep:0.15.1 /datain /datain/derivatives/ --recon-input /datain/deriva
 --participant-label sub-SUB330 --fs-license-file /opt/freesurfer/license.txt
 
 # Running SCFSL GPU tractography
- docker exec --gpus all -e LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-9.1/lib64 \
+ docker exec --gpus all -e LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-10.2/lib64 \
   -v /path/to/freesurfer/license.txt:/opt/freesurfer/license.txt \
   -v /path/project/bids:/data mrfilbi/scfsl_gpu:0.3.2 /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
 
@@ -60,7 +60,7 @@ singularity run --nv -B /path/project/bids:/datain,/path/to/freesurfer/license.t
 /path/to/qsiprep-v0.15.1.sif /datain /datain/derivatives/ --recon-input /datain/derivatives/qsiprep/ --recon_spec reorient_fslstd \ --output-resolution 1.6 participant --participant-label sub-SUB330 --fs-license-file /opt/freesurfer/license.txt
 
 # Running SCFSL GPU tractography
-SINGULARITY_ENVLD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-9.1/lib64 \
+SINGULARITY_ENVLD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-10.2/lib64 \
 singularity exec --nv -B /path/to/freesurfer/license.txt:/opt/freesurfer/license.txt,/path/project/bids:/data \
 /path/to/scfsl_gpu-v0.3.2.sif /bin/bash /scripts/proc_fsl_connectome_fsonly.sh sub-SUB339 ses-A
 
