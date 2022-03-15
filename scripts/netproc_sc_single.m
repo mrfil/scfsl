@@ -2,7 +2,7 @@
 %%% Select the folder containing the .csv results of all your participants
 %%%     -usually ResStructConn
 %%%
-%%% a paul camacho joint
+%%% Paul B Camacho
 
 function [NBStable,NBSmatROIslabeled] = netproc_sc_single(numROIs,partID,location)
 

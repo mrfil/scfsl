@@ -1,1 +1,0 @@
-Run the singularity image scfsl built from the Docker image and bind the data folder as /data
