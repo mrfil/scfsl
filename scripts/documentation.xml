@@ -1,5 +1,5 @@
 <StructConFSL_Doc>
-  <date>2022-03-06</date>
-  <body>Structural Connectivity pipeline based on FSL's bedpostx_gpu and probtrack2.0_gpu, with ROIs defined by the Desikan-Killiany atlas Freesurfer recon-all parcellation as run in fMRIPrep v21.0.1</body>
+  <date>2023-02-08</date>
+  <body>Structural Connectivity pipeline based on FSL's bedpostx_gpu and probtrack2.0_gpu, with ROIs defined by the AAL116 atlas output of QSIPrep</body>
   <body>eddy correct, fmriprep preproc -> dtipipeline, further detailed description</body>
 </StructConFSL_Doc>
