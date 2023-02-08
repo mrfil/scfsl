@@ -73,6 +73,9 @@ do
   cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_dwi.bvec ${DATDIR}/bvecs
   cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_dwi.nii.gz ${DATDIR}/data.nii.gz
   cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_mask.nii.gz ${DATDIR}/nodif_brain_mask.nii.gz
+  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_desc-aal116_atlas.nii.gz ${DATDIR}/aal116_atlas.nii.gz
+  #reorient run-specific atlas image to FSL standard convention
+  fslreorient2std ${DATDIR}/aal116_atlas.nii.gz ${DATDIR}/aal116_atlas_fslstd.nii.gz
   #mask get nodif from qsiprep preproc dwi and brain extract with qsirecon brain mask to make ${DATDIR}/nodif_brain.nii.gz
   fslroi ${DATDIR}/data.nii.gz ${DATDIR}/nodif.nii.gz 0 1
   fslmaths ${DATDIR}/nodif.nii.gz -mas ${DATDIR}/nodif_brain_mask.nii.gz ${DATDIR}/nodif_brain.nii.gz 
@@ -83,8 +86,9 @@ do
   #get only the first image - this is the non-MNI space image
   preproc=$(ls ${sub}_${session}*_desc-preproc_T1w.nii.gz | head -n 1)
   echo "Using ${preproc} as IMG_brain"
-  parc=$(ls ${sub}_${session}*_desc-aparcaseg_dseg.nii.gz | head -n 1)
-  echo "Using ${parc} as Freesurfer parcellation image"
+  #Uses reoriented AAL116 from qsiprep outputs as parcellation
+  parc="${DATDIR}/aal116_atlas_fslstd.nii.gz"
+  echo "Using ${parc} as AAL116 atlas parcellation image"
   #copy preproc T1w to tmp processing dir
   cp ${preproc} ${DATDIR}/IMG_brain.nii.gz
 
@@ -114,9 +118,9 @@ parcs=${STUDY_SUBJECTS_DIR}/${sub}/${session}/anat/${parc}
 export parcellation_image=${parc}
 echo ${parcellation_image}
 
-flirt -cost mutualinfo -dof 6 -in ${DATDIR}/nodif_brain.nii.gz -ref ${DATDIR}/IMG_brain.nii.gz -omat diff2rage.mat -out diff_in_rage.nii.gz
-convert_xfm -omat rage2diff.mat -inverse diff2rage.mat
-flirt -interp nearestneighbour -in ${parcs} -ref ${DATDIR}/nodif_brain.nii.gz -applyxfm -init rage2diff.mat -out FS_to_DTI.nii.gz
+#flirt -cost mutualinfo -dof 6 -in ${DATDIR}/nodif_brain.nii.gz -ref ${DATDIR}/IMG_brain.nii.gz -omat diff2rage.mat -out diff_in_rage.nii.gz
+#convert_xfm -omat rage2diff.mat -inverse diff2rage.mat
+#flirt -interp nearestneighbour -in ${parcs} -ref ${DATDIR}/nodif_brain.nii.gz -applyxfm -init rage2diff.mat -out FS_to_DTI.nii.gz
 
 cd ${RESDIR}  # should still be in there, but just to make sure                                                      
 
@@ -128,7 +132,8 @@ source ${SCRIPTS_DIR}/CSF_mask.sh
 # dev note: do we need to make CSF_mask? we might have usable output from FS or QSIPrep
 
 #Generate ROIs for tractography AND get volumes of each ROI for later weighting in a CSV file
-python ${SCRIPTS_DIR}/Freesurfer_ROIs_fsonly.py
+# change to get ROIs from AAL116 label file
+python ${SCRIPTS_DIR}/AAl116_ROIs_fsonly.py
 
 cd ${RESDIR}
 
