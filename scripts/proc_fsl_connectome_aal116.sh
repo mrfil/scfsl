@@ -39,6 +39,7 @@ do
   #location of freesurfer subject data
   STUDY_FSDIR=${STUDY_SUBJECTS_DIR}/
   #location of QSIPrep preprocessing + reorient_fslstd
+  STUDY_QSIRECONDIR=${QSIRECON_DIR}
   STUDY_QSIPREPDIR=${QSIPREP_DIR}
   #location of connectome output
   STUDY_CONDIR=${RESULTS_DIR}/${sub}/${session}/${STUDY_CONN_PATH}
@@ -65,11 +66,12 @@ do
   cd ${RESDIR}
   mkdir -p "${RESDIR}/DTIMASK"
   #copy files from qsirecon fsl reorient to DATADIR
-  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_dwi.bval ${DATDIR}/bvals
-  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_dwi.bvec ${DATDIR}/bvecs
-  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_dwi.nii.gz ${DATDIR}/data.nii.gz
-  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_mask.nii.gz ${DATDIR}/nodif_brain_mask.nii.gz
-  cp ${STUDY_QSIPREPDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_desc-aal116_atlas.nii.gz ${DATDIR}/aal116_atlas.nii.gz
+  cp ${STUDY_QSIRECONDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_dwi.bval ${DATDIR}/bvals
+  cp ${STUDY_QSIRECONDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_dwi.bvec ${DATDIR}/bvecs
+  cp ${STUDY_QSIRECONDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_dwi.nii.gz ${DATDIR}/data.nii.gz
+  cp ${STUDY_QSIRECONDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_fslstd_mask.nii.gz ${DATDIR}/nodif_brain_mask.nii.gz
+  cp ${STUDY_QSIPREPDIR}/${sub}/anat/${sub}_label-CSF_probseg.nii.gz ${DATDIR}/CSF_probseg.nii.gz
+  cp ${STUDY_QSIRECONDIR}/${sub}/${session}/dwi/${sub}_${session}_run-1_space-T1w_desc-preproc_desc-aal116_atlas.nii.gz ${DATDIR}/aal116_atlas.nii.gz
   #reorient run-specific atlas image to FSL standard convention
   fslreorient2std ${DATDIR}/aal116_atlas.nii.gz ${DATDIR}/aal116_atlas_fslstd.nii.gz
   #mask get nodif from qsiprep preproc dwi and brain extract with qsirecon brain mask to make ${DATDIR}/nodif_brain.nii.gz
