@@ -1,16 +1,11 @@
 #Written by PAUL SHRAP on 10-4-2016
 #Weight connectomes by average volume (number of voxels in each ROI)
-#Edited for zero volume ROIs by Paul Camacho 01-15-2020
+#Edited for zero volume ROIs by Paul Camacho 01-15-2020, modified for AAL116 atlas 02-08-2023
 
-#from ConfigParser import ConfigParser as CFP
 import os
 import csv
 
-#get parcellation number from connectome config file
-#get_config=CFP()
-#get_config.readfp(open('{}/connectome_variables.cfg'.format(os.environ['SCRIPTS_DIR'])))
-#parcellation_num=int(get_config.get('PARC_SCHEMES','parcellation_number'))
-parcellation_num = 84
+parcellation_num = 116
 #parcellation_num = int(os.environ['parcellation_number'])
 
 with open('ROI_Volumes.csv', 'r') as f:
