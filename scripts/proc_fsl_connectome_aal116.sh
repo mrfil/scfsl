@@ -14,7 +14,7 @@
 #
 # Adapted by Paul B Camacho for use with QSIPrep preprocessing and CUDA acceleration
 
-source /scripts/connectome_variables_fsonly.cfg
+source /scripts/connectome_variables_aal116.cfg
 
 sublist=$1
 session=$2
