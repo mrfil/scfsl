@@ -7,14 +7,10 @@
 
 # MUST READ BELOW TO MAKE SURE SCRIPT RUNS:
 # Need a SCRIPTS_DIR with all approriate scripts
-# Make sure FreeSurfer recon-all is run first
-
 
 # !!!!!!!! NOTE: SUBJECTS_DIR must be the temp SUBJECTS DIR, NOT THE ONE ON THE SERVER!
 #  SUBJECTS_DIR must be the /usr/local/freesurfer   !!!!!
 # !!!!!!!!   THERE IS A RM -RF SUBJECT_DIR
-#
-# This one just uses freesurfer parcs
 #
 # Adapted by Paul B Camacho for use with QSIPrep preprocessing and CUDA acceleration
 
@@ -148,11 +144,11 @@ probtrackx2_gpu --network -x "$RESDIR"/masks.txt -l -c 0.2 -S 2000 --steplength=
 cd ${RESDIR}
 
 #convert naming of raw connectome file
-  python ${SCRIPTS_DIR}/FSL_convert_fdtmatrix_csv_fsonly.py
+  python ${SCRIPTS_DIR}/FSL_convert_fdtmatrix_csv_aal116.py
 #compute transformation on Connectivity matrix
-  python ${SCRIPTS_DIR}/volume_weight_connectome_fsonly.py
+  python ${SCRIPTS_DIR}/volume_weight_connectome_aal116.py
 #add column headers for connectome file which is required for visualization
-  python ${SCRIPTS_DIR}/add_column_headers_fsonly.py
+  python ${SCRIPTS_DIR}/add_column_headers_aal116.py
   source ${SCRIPTS_DIR}/push_results.sh
 done
 
