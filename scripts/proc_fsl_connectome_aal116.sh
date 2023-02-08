@@ -133,7 +133,7 @@ source ${SCRIPTS_DIR}/CSF_mask.sh
 
 #Generate ROIs for tractography AND get volumes of each ROI for later weighting in a CSV file
 # change to get ROIs from AAL116 label file
-python ${SCRIPTS_DIR}/AAl116_ROIs_fsonly.py
+python ${SCRIPTS_DIR}/AAl116_ROIs.py
 
 cd ${RESDIR}
 
