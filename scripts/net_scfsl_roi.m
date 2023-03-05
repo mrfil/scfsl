@@ -9,7 +9,7 @@ subfolders = dir(strcat(mainfolder,"/*/*/Conn*"));
 subfolders = subfolders([subfolders.isdir] & ~startsWith({subfolders.name},'.'));
 
 %%% Set this before running
-numROIs = 82;
+numROIs = 100;
 
 for i = 1:length(subfolders)
     files = dir(fullfile(mainfolder,"/*/*",subfolders(i).name,'*VolumeWeighted.csv'));

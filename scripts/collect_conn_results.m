@@ -1,6 +1,7 @@
 %% Code to read in all connectome results from the MS data
 % 2016-07-05
 % Brad Sutton and Jorge Maldonado
+% modified by Paul B Camacho 2023-03-04
 
 
 
@@ -10,8 +11,8 @@ subfid = fopen('subjects.txt','r');
 
 %subj_root = '/shared/mrfil-data/data/MS_Project/'
 subj_root = '/Users/pcamach2/Downloads/TDP/POST/ResStructConn/'
-conn_in_subj = '/Conn116/'
-con_name = 'conn116_VolumeWeighted.csv'
+conn_in_subj = '/Conn100/'
+con_name = 'conn100_VolumeWeighted.csv'
 
 %%
 num_subj = 5; %50;
