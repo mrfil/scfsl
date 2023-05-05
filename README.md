@@ -1,5 +1,5 @@
 # scfsl
-FSL-based structural connectivity pipeline (WIP)
+FSL-based structural connectivity pipeline
 
 Modified version of original pipeline to run as a sub-pipeline of our HPC pipelines with BIDS compatibility achieved with HeuDiConv. 
 Preprocessing and Freesurfer parcellation added from fMRIPrep. 
