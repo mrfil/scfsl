@@ -16,3 +16,11 @@ with open('{}/fdt_network_matrix'.format(os.environ['RESDIR']), 'r') as f:
 with open('conn_{}.csv'.format(parcellation_num), 'a') as f:
 	writer = csv.writer(f)
 	writer.writerows(lines)
+
+with open('{}/fdt_network_matrix_lengths'.format(os.environ['RESDIR']), 'r') as f:
+	lines = [l.split() for l in f]
+
+
+with open('conn_ompl_{}.csv'.format(parcellation_num), 'a') as f:
+	writer = csv.writer(f)
+	writer.writerows(lines)
